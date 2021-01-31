@@ -22,11 +22,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: rm -rf .env
-    - name: Make envfile
-      run: create-env --env-file .env --env-prefix PROD_
-      env: 
-        PROD_SENDGRID_API_KEY: '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'
-        PROD_SENDER_EMAIL_ADDRESS: 'info@catfriendlysofa.com'
+    # - name: Make envfile
+      # run: create-env --env-file .env --env-prefix PROD_
+      # env: 
+      #   PROD_SENDGRID_API_KEY: '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'
+      #   PROD_SENDER_EMAIL_ADDRESS: 'info@catfriendlysofa.com'
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
