@@ -30,7 +30,7 @@ module.exports = {
 			methods: ["GET", "OPTIONS", "POST", "PUT", "DELETE"],
 			allowedHeaders: "*",
 			//exposedHeaders: "*",
-			credentials: true,
+			// credentials: true,
 			maxAge: null
 		},
 
