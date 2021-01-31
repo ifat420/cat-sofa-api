@@ -26,7 +26,7 @@ module.exports = {
 
 		// Global CORS settings
 		cors: {
-			origin: "*",
+			origin: ["https://www.catfriendlysofa.com", "http://localhost:3000"],
 			methods: ["GET", "OPTIONS", "POST", "PUT", "DELETE"],
 			allowedHeaders: "*",
 			//exposedHeaders: "*",
