@@ -19,7 +19,7 @@ module.exports = {
 		port: process.env.PORT || 4001,
 
 		// Exposed IP
-		ip: "0.0.0.0",
+		ip: "127.0.0.1",
 
 		// Global Express middlewares. More info: https://moleculer.services/docs/0.14/moleculer-web.html#Middlewares
 		use: [],
