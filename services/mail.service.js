@@ -49,10 +49,14 @@ module.exports = {
 					type: "object",
 					strict: true,
 					props: {
-						from: { type: "string" },
-						subject: { type: "string" },
-						text: { type: "string" },
-						name: { type: "string" }
+						name: { type: "string" },
+						surname: { type: "string" },
+						city: { type: "string" },
+						country: { type: "string" },
+						phone: { type: "string" },
+						email: { type: "string" },
+						comment: { type: "string" },
+						accept_policy: { type: "boolean" }
 					}
 				}
 			},
@@ -64,16 +68,47 @@ module.exports = {
 					to: `${process.env.SENDER_EMAIL_ADDRESS}`,
 					from: `${mailData.name}<noreply@catfriendlysofa.com>`, // Use the email address or domain you verified above
 					subject: 'Cat Friendly Sofa Contact Mail',
-					text: 'Testing can friendly sofa mail',
-					html: '<strong>Testing can friendly sofa mail</strong>',
+					text: 'Cat Friendly Sofa Contact Mail',
+					html: `	<h1 style="margin-bottom: 15px;"> Can Friendly Contact </h1>
+							<table style="max-width: 400px;border: 1px solid black;border-collapse: collapse;">
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Name</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;"> ${mailData.name} </td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Surname</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;"> ${mailData.surname} </td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">City </td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.city}}</td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Country</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.country}</td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Phone/State</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.phone}</td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Email/State</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;"><a href="mailto:${mailData.email}">${mailData.email}</a></td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Comment</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.comment}</td>
+							</tr>
+							</table>
+							`
 				};
 
 				try {
 					await sgMail.send(msg);
-					return { status: "Mail Successfully send" }
+					return { message: "Mail Successfully send", status: 'Ok' }
 				} catch (error) {
 					console.error(error);
-					return { status: "Failed to send mail" }
+					return { message: "Failed to send mail", status: 'Failed' }
 				}
 			}
 		},
@@ -84,10 +119,28 @@ module.exports = {
 					type: "object",
 					strict: true,
 					props: {
-						from: { type: "string" },
-						subject: { type: "string" },
-						text: { type: "string" },
-						name: { type: "string" },
+						firstname: { type: "string" },
+						surname: { type: "string" },
+						address: { type: "string" },
+						city: { type: "string" },
+						province: { type: "string" },
+						zip: { type: "string" },
+						country: { type: "string" },
+						orderFirstname: { type: "string" },
+						orderSurname: { type: "string" },
+						orderAddress: { type: "string" },
+						orderCity: { type: "string" },
+						orderProvince: { type: "string" },
+						orderZip: { type: "string" },
+						orderCountry: { type: "string" },
+						passport: { type: "string" },
+						phone: { type: "string" },
+						email: { type: "string" },
+						color: { type: "array" },
+						interest: { type: "array" },
+						message: { type: "string" },
+						news: { type: "boolean" },
+						salesitem: { type: "boolean" },
 						images: {
 							type: "array"
 						}
@@ -113,15 +166,101 @@ module.exports = {
 
 				const msg = {
 					to: `${process.env.SENDER_EMAIL_ADDRESS}`,
-					from: `${mailData.name}<noreply@catfriendlysofa.com>`, // Use the email address or domain you verified above
+					from: `${mailData.firstname}<noreply@catfriendlysofa.com>`, // Use the email address or domain you verified above
 					subject: 'CatSofa Order',
-					text: 'Testing can friendly sofa mail',
-					html: '<strong>Testing can friendly sofa mail</strong>',
+					text: 'Can Friendly Sofa Order',
+					html: `<h1 style="margin-bottom: 15px;"> Can Friendly Sofa Order </h1>
+							<table style="max-width: 400px;border: 1px solid black;border-collapse: collapse;">
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Name</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;"> ${mailData.firstname} </td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Surname</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;"> ${mailData.surname} </td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Address</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.address}</td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">City</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.city}</td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Province/State</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.province}</td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Zip</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.zip}</td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Country</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.country}</td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Passport Number</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.passport}</td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Delivery Name</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.orderFirstname}</td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Delivery Surname</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.orderSurname}</td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Delivery Address</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.orderAddress}</td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Delivery City</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.orderCity}</td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Delivery Province/State</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.orderProvince}</td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Delivery Zip Code</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.orderZip}</td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Delivery Country</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.orderCountry}</td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Phone Number</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.phone}</td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Email</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;"><a href="mailto:${mailData.email}">${mailData.email}</a></td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Cat Friendly Sofa colour</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${this.colorString(mailData.color)}</td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Interested in Cat Friendly Sofa for</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${this.colorString(mailData.interest)}</td>
+							</tr>
+							<tr>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Message</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.message}</td>
+							</tr>
+						</table>`,
 					attachments: attachmentsArray
 				};
 
 				try {
 					await sgMail.send(msg);
+					mailData.images.forEach(function (item) {
+						let imagePath = path.join(uploadDir, item.meta.filename);
+						fs.unlinkSync(imagePath)
+					});
 					return { status: "Mail Successfully send" }
 				} catch (error) {
 					console.error(error);
@@ -175,7 +314,13 @@ module.exports = {
 	 * Methods
 	 */
 	methods: {
-
+		colorString(arr) {
+			let s = '';
+			arr.forEach(item => {
+				s = s + item + ' ,';
+			})
+			return s;
+		}
 	},
 
 	/**
