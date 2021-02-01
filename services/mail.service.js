@@ -81,7 +81,7 @@ module.exports = {
 							</tr>
 							<tr>
 								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">City </td>
-								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.city}}</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.city}</td>
 							</tr>
 							<tr>
 								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Country</td>
@@ -167,7 +167,22 @@ module.exports = {
 				}
 
 				const msg = {
-					to: `${process.env.SENDER_EMAIL_ADDRESS}`,
+					"personalizations": [
+						{
+							"to": [
+								{
+									"email": `${process.env.SENDER_EMAIL_ADDRESS}`
+								}
+							]
+						},
+						{
+							"to": [
+								{
+									"email": `${mailData.email}`
+								}
+							]
+						}
+					],
 					from: `${mailData.firstname}<noreply@catfriendlysofa.com>`, // Use the email address or domain you verified above
 					subject: 'CatSofa Order',
 					text: 'Can Friendly Sofa Order',
@@ -175,67 +190,67 @@ module.exports = {
 							<table style="max-width: 400px;border: 1px solid black;border-collapse: collapse;">
 							<tr>
 								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Name</td>
-								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;"> ${mailData.firstname} </td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;"> ${mailData.firstname ? mailData.firstname : ''} </td>
 							</tr>
 							<tr>
 								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Surname</td>
-								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;"> ${mailData.surname} </td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;"> ${mailData.surname ? mailData.surname  : ''} </td>
 							</tr>
 							<tr>
 								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Address</td>
-								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.address}</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.address ? mailData.address : ''}</td>
 							</tr>
 							<tr>
 								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">City</td>
-								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.city}</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.city ? mailData.city : ''}</td>
 							</tr>
 							<tr>
 								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Province/State</td>
-								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.province}</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.province ? mailData.province : ''}</td>
 							</tr>
 							<tr>
 								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Zip</td>
-								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.zip}</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.zip ? mailData.zip : ''}</td>
 							</tr>
 							<tr>
 								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Country</td>
-								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.country}</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.country ? mailData.country : ''}</td>
 							</tr>
 							<tr>
 								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Passport Number</td>
-								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.passport}</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.passport ? mailData.passport : ''}</td>
 							</tr>
 							<tr>
 								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Delivery Name</td>
-								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.orderFirstname}</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.orderFirstname ? mailData.orderFirstname : ''}</td>
 							</tr>
 							<tr>
 								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Delivery Surname</td>
-								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.orderSurname}</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.orderSurname ? mailData.orderSurname : ''}</td>
 							</tr>
 							<tr>
 								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Delivery Address</td>
-								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.orderAddress}</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.orderAddress ? mailData.orderAddress : ''}</td>
 							</tr>
 							<tr>
 								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Delivery City</td>
-								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.orderCity}</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.orderCity ? mailData.orderCity : ''}</td>
 							</tr>
 							<tr>
 								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Delivery Province/State</td>
-								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.orderProvince}</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.orderProvince ? mailData.orderProvince : ''}</td>
 							</tr>
 							<tr>
 								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Delivery Zip Code</td>
-								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.orderZip}</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.orderZip ? mailData.orderZip : ''}</td>
 							</tr>
 							<tr>
 								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Delivery Country</td>
-								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.orderCountry}</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.orderCountry ? mailData.orderCountry : ''}</td>
 							</tr>
 							<tr>
 								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Phone Number</td>
-								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.phone}</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.phone ? mailData.phone : ''}</td>
 							</tr>
 							<tr>
 								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Email</td>
@@ -251,7 +266,7 @@ module.exports = {
 							</tr>
 							<tr>
 								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Message</td>
-								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.message}</td>
+								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">${mailData.message ? mailData.message : ''}</td>
 							</tr>
 						</table>`,
 					attachments: attachmentsArray
