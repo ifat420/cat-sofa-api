@@ -122,27 +122,28 @@ module.exports = {
 						firstname: { type: "string" },
 						surname: { type: "string" },
 						address: { type: "string" },
-						city: { type: "string" },
-						province: { type: "string" },
-						zip: { type: "string" },
-						country: { type: "string" },
-						orderFirstname: { type: "string" },
-						orderSurname: { type: "string" },
-						orderAddress: { type: "string" },
-						orderCity: { type: "string" },
-						orderProvince: { type: "string" },
-						orderZip: { type: "string" },
-						orderCountry: { type: "string" },
-						passport: { type: "string" },
+						city: { type: "string", optional: true },
+						province: { type: "string", optional: true },
+						zip: { type: "string", optional: true},
+						country: { type: "string", optional: true },
+						orderFirstname: { type: "string", optional: true },
+						orderSurname: { type: "string", optional: true },
+						orderAddress: { type: "string", optional: true },
+						orderCity: { type: "string", optional: true },
+						orderProvince: { type: "string", optional: true },
+						orderZip: { type: "string", optional: true },
+						orderCountry: { type: "string", optional: true },
+						passport: { type: "string", optional: true },
 						phone: { type: "string" },
 						email: { type: "string" },
 						color: { type: "array" },
 						interest: { type: "array" },
-						message: { type: "string" },
-						news: { type: "boolean" },
-						salesitem: { type: "boolean" },
+						message: { type: "string", optional: true },
+						news: { type: "boolean", optional: true },
+						salesitem: { type: "boolean", optional: true },
 						images: {
-							type: "array"
+							type: "array",
+							optional: true
 						}
 					}
 				}
@@ -152,17 +153,18 @@ module.exports = {
 				let mailData = ctx.params.body;
 
 				let attachmentsArray = [];
+				if (mailData.imageFiles && mailData.imageFiles.length > 0) {
+					mailData.images.forEach(function (item) {
+						let a = {};
+						let imagePath = path.join(uploadDir, item.meta.filename);
+						a.content = fs.readFileSync(imagePath).toString("base64");
+						a.filename = item.meta.filename;
+						a.type = item.meta.mimetype;
+						a.disposition = "attachment";
 
-				mailData.images.forEach(function (item) {
-					let a = {};
-					let imagePath = path.join(uploadDir, item.meta.filename);
-					a.content = fs.readFileSync(imagePath).toString("base64");
-					a.filename = item.meta.filename;
-					a.type = item.meta.mimetype;
-					a.disposition = "attachment";
-
-					attachmentsArray.push(a);
-				})
+						attachmentsArray.push(a);
+					})
+				}
 
 				const msg = {
 					to: `${process.env.SENDER_EMAIL_ADDRESS}`,
@@ -257,10 +259,12 @@ module.exports = {
 
 				try {
 					await sgMail.send(msg);
-					mailData.images.forEach(function (item) {
-						let imagePath = path.join(uploadDir, item.meta.filename);
-						fs.unlinkSync(imagePath)
-					});
+					if (mailData.imageFiles && mailData.imageFiles.length > 0) {
+						mailData.images.forEach(function (item) {
+							let imagePath = path.join(uploadDir, item.meta.filename);
+							fs.unlinkSync(imagePath)
+						});
+					}
 					return { status: "Mail Successfully send" }
 				} catch (error) {
 					console.error(error);
