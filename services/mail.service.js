@@ -153,7 +153,7 @@ module.exports = {
 				let mailData = ctx.params.body;
 
 				let attachmentsArray = [];
-				if (mailData.imageFiles && mailData.imageFiles.length > 0) {
+				if (mailData.images && mailData.images.length > 0) {
 					mailData.images.forEach(function (item) {
 						let a = {};
 						let imagePath = path.join(uploadDir, item.meta.filename);
@@ -259,7 +259,7 @@ module.exports = {
 
 				try {
 					await sgMail.send(msg);
-					if (mailData.imageFiles && mailData.imageFiles.length > 0) {
+					if (mailData.images && mailData.images.length > 0) {
 						mailData.images.forEach(function (item) {
 							let imagePath = path.join(uploadDir, item.meta.filename);
 							fs.unlinkSync(imagePath)
