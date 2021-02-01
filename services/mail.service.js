@@ -69,7 +69,7 @@ module.exports = {
 					from: `${mailData.name}<noreply@catfriendlysofa.com>`, // Use the email address or domain you verified above
 					subject: 'Cat Friendly Sofa Contact Mail',
 					text: 'Cat Friendly Sofa Contact Mail',
-					html: `	<h1 style="margin-bottom: 15px;"> Can Friendly Contact </h1>
+					html: `	<h1 style="margin-bottom: 15px;"> Cat Friendly Contact </h1>
 							<table style="max-width: 400px;border: 1px solid black;border-collapse: collapse;">
 							<tr>
 								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Name</td>
@@ -185,8 +185,8 @@ module.exports = {
 					],
 					from: `${mailData.firstname}<noreply@catfriendlysofa.com>`, // Use the email address or domain you verified above
 					subject: 'CatSofa Order',
-					text: 'Can Friendly Sofa Order',
-					html: `<h1 style="margin-bottom: 15px;"> Can Friendly Sofa Order </h1>
+					text: 'Cat Friendly Sofa Order',
+					html: `<h1 style="margin-bottom: 15px;"> Cat Friendly Sofa Order </h1>
 							<table style="max-width: 400px;border: 1px solid black;border-collapse: collapse;">
 							<tr>
 								<td style="border: 1px solid black;border-collapse: collapse;padding: 15px;">Name</td>
